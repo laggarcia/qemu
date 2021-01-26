@@ -285,7 +285,7 @@ static int vhost_dev_has_iommu(struct vhost_dev *dev)
      * For vhost, VIRTIO_F_IOMMU_PLATFORM means the backend support
      * incremental memory mapping API via IOTLB API. For platform that
      * does not have IOMMU, there's no need to enable this feature
-     * which may cause unnecessary IOTLB miss/update trnasactions.
+     * which may cause unnecessary IOTLB miss/update transactions.
      */
     return vdev->dma_as != &address_space_memory &&
            virtio_host_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM);
