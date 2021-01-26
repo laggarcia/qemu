@@ -1,0 +1,103 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "createBuildAndBinDir",
+            "type": "shell",
+            "command": "mkdir -p ./build ~/tests/qemu",
+            "group": "build"
+        },
+        {
+            "label": "configureRuntime",
+            "dependsOn": "createBuildAndBinDir",
+            "type": "shell",
+            "command": "../configure",
+            "args": [
+                "--prefix=/home/laggarcia/tests/qemu",
+                "--target-list=x86_64-softmmu"
+            ],
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "configureDebug",
+            "dependsOn": "createBuildAndBinDir",
+            "type": "shell",
+            "command": "../configure",
+            "args": [
+                "--prefix=/home/laggarcia/tests/qemu",
+                "--target-list=x86_64-softmmu",
+                "--enable-debug",
+                "--enable-sanitizers",
+                "--disable-strip"
+            ],
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "build",
+            "dependsOn": "createBuildAndBinDir",
+            "type": "shell",
+            "command": "make -j $(nproc)",
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "install",
+            "dependsOn": "build",
+            "type": "shell",
+            "command": "make install",
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean",
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "none"
+        },
+        {
+            "label": "distClean",
+            "type": "shell",
+            "command": "make distclean",
+            "options": {
+                "cwd": "./build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "none"
+        },
+    ]
+}

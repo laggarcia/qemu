@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "typeindex": "cpp",
+        "typeinfo": "cpp",
+        "*.inc": "c"
+    },
+    "C_Cpp.default.includePath": [
+        "$(default)",
+        "$(workspaceFolder)/include"
+    ],
+    "editor.formatOnSaveMode": "modifications"
+}
