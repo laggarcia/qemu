@@ -16,7 +16,8 @@
             "command": "../configure",
             "args": [
                 "--prefix=/home/laggarcia/tests/qemu",
-                "--target-list=x86_64-softmmu"
+                "--target-list=x86_64-softmmu",
+                "--enable-virtiofsd"
             ],
             "options": {
                 "cwd": "./build"
@@ -34,6 +35,7 @@
             "args": [
                 "--prefix=/home/laggarcia/tests/qemu",
                 "--target-list=x86_64-softmmu",
+                "--enable-virtiofsd",
                 "--enable-debug",
                 "--enable-sanitizers",
                 "--disable-strip"
