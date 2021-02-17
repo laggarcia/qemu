@@ -8,5 +8,7 @@
         "$(default)",
         "$(workspaceFolder)/include"
     ],
-    "editor.formatOnSaveMode": "modifications"
+    "editor.formatOnSaveMode": "modifications",
+    "meson.builddir": "/home/laggarcia/src/git/qemu/build",
+    "meson.configureLaunchJson": false
 }

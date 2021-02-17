@@ -5,43 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Pipe Attach",
-            "type": "cppdbg",
-            "request": "attach",
-            "program": "enter program name, for example ${workspaceFolder}/a.out",
-            "processId": "${command:pickRemoteProcess}",
-            "pipeTransport": {
-                "debuggerPath": "/usr/bin/gdb",
-                "pipeProgram": "/usr/bin/ssh",
-                "pipeArgs": [],
-                "pipeCwd": ""
-            },
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        {
-            "name": "(gdb) Attach",
-            "type": "cppdbg",
-            "request": "attach",
-            "program": "/home/laggarcia/tests/qemu/bin/qemu-system-x86_64",
-            "processId": "${command:pickProcess}",
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        {
-            "name": "(gdb) Launch",
+            "name": "QEMU",
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/laggarcia/tests/qemu/bin/qemu-system-x86_64",
@@ -60,7 +24,7 @@
             //    "-numa node,memdev=mem"
             //],
             "miDebuggerServerAddress": "localhost:2345",
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "/home/laggarcia/tests/qemu",
             "environment": [],
             //"console": "externalTerminal",
@@ -70,7 +34,45 @@
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
+                },
+                {
+                    "description": "Ignore SIGUSR1",
+                    "text": "handle SIGUSR1 noprint",
+                    "ignoreFailures": false
                 }
+            ]
+        },
+        {
+            "name": "virtiofsd",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/laggarcia/tests/qemu/libexec/virtiofsd",
+            // "args": [
+            //     "--socket-path=./vhostqemu",
+            //     "-o source=/mnt",
+            //     "-d"
+            // ],
+            "miDebuggerServerAddress": "localhost:2346",
+            "stopAtEntry": false,
+            "cwd": "/home/laggarcia/tests/qemu",
+            "environment": [],
+            //"console": "externalTerminal",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "virito-fs",
+            "configurations": [
+                "virtiofsd",
+                "QEMU"
             ]
         }
     ]
